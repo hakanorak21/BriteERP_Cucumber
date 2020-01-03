@@ -25,7 +25,7 @@ public class BasePage {
 
     @FindBy(xpath = "//button[contains(text(),'Log in')]")
     public  WebElement loginButton;
-                                                // String moduleLocator = "//a[text()='" + moduleName + "'][@class='navbar-item']";
+
     // These elements are from top navigation bar CONTACTS and POS (Point of Sale)
     @FindBy(xpath = "//a[@class='oe_menu_toggler'][@data-menu='68']")
     public WebElement contactsModule;
@@ -45,7 +45,7 @@ public class BasePage {
     }
 //---------------------------------------------------------------------------------------------------------------
 
-    // Method for navigation to CONTACTS module or POS
+    // Method for navigation to CONTACTS module or POS module
 
     public void navigateTo(String moduleName) {
 
