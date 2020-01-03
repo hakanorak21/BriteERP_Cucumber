@@ -27,8 +27,10 @@ public class LoginPage extends BasePage {
     }
 //--------------------------------------------------------------------------------------------------------------
 
+    // on the firs page we have to click on login link
     // Login method
     public void login(String email, String password) {
+        loginButton.click();
         emailBox.sendKeys(email);
         passwordBox.sendKeys(password, Keys.ENTER);
     }
