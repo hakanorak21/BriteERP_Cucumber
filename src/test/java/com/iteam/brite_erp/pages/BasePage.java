@@ -13,18 +13,7 @@ import java.sql.Driver;
 
 public class BasePage {
 
-    // These elements are for login the page
-    @FindBy(xpath = "//a [@href='/web/login']")
-    public WebElement loginLink;
-
-    @FindBy(xpath = "//input[@id='login']")
-    public WebElement emailBox;
-
-    @FindBy(xpath = "//input[@id='password']")
-    public WebElement passwordBox;
-
-    @FindBy(xpath = "//button[contains(text(),'Log in')]")
-    public  WebElement loginButton;
+      // if you login as a POSMANAGER you will see these elements
 
     // These elements are from top navigation bar CONTACTS and POS (Point of Sale)
     @FindBy(xpath = "//a[@class='oe_menu_toggler'][@data-menu='68']")
@@ -32,18 +21,12 @@ public class BasePage {
 
     @FindBy(xpath = "//a[@class='oe_menu_toggler'][@data-menu='484']")
     public WebElement posModule;
+
 //-------------------------------------------------------------------------------------------------------------
     public BasePage(){
         PageFactory.initElements(Driver.get(), this);
     }
 //--------------------------------------------------------------------------------------------------------------
-
-    // Login method
-    public void login(String email, String password) {
-        emailBox.sendKeys(email);
-        passwordBox.sendKeys(password, Keys.ENTER);
-    }
-//---------------------------------------------------------------------------------------------------------------
 
     // Method for navigation to CONTACTS module or POS module
 
@@ -66,9 +49,26 @@ public class BasePage {
         BrowserUtils.waitForPageToLoad(10);
     }
 
-//--------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
 
-    // Wait method for waiting till the page loaded for not missing any HTML code.
+    // For getting title
+    public String getPageSubTitle() {
+        //ant time we are verifying page name, or page subtitle, loader mask appears
+//        waitUntilLoaderMaskDisappear();
+        BrowserUtils.waitForStaleElement(pageSubTitle);
+        return pageSubTitle.getText();
+    }
+
+    public String getPageTitle() {
+        //ant time we are verifying page name, or page subtitle, loader mask appears
+//        waitUntilLoaderMaskDisappear();
+        BrowserUtils.waitForStaleElement(pageTitle);
+        return pageTitle.getText();
+    }
+
+//-----------------------------------------------------------------------------------------
+
+    // Wait methods
     public boolean waitUntilLoaderMaskDisappear() {
         WebDriverWait wait = new WebDriverWait(Driver.get(), 30);
         try {
@@ -84,21 +84,28 @@ public class BasePage {
         return false;
     }
 
-
-    public String getPageSubTitle() {
-        //ant time we are verifying page name, or page subtitle, loader mask appears
-//        waitUntilLoaderMaskDisappear();
-        BrowserUtils.waitForStaleElement(pageSubTitle);
-        return pageSubTitle.getText();
+    public void waitForPageSubTitle(String pageSubtitleText) {
+        new WebDriverWait(Driver.get(), 10).until(ExpectedConditions.textToBe(By.cssSelector("h2[class='subtitle']"), pageSubtitleText));
     }
 
-    public String getPageTitle() {
-        //ant time we are verifying page name, or page subtitle, loader mask appears
-//        waitUntilLoaderMaskDisappear();
-        BrowserUtils.waitForStaleElement(pageTitle);
-        return pageTitle.getText();
+
+    public void waitForVisibilityOfElement(WebElement element) {
+        new WebDriverWait(Driver.get(), 10).until(ExpectedConditions.visibilityOf(element));
     }
 
+    //--------------------------------------------------------------------------------------------------
+
+    public static void selectFromDropDown(WebElement element , String Visibletext){
+        Select select = new Select(element);
+        select.selectByVisibleText(Visibletext);
+    }
+
+
+    public static void hoverToElement(WebElement element){
+        Actions actions = new Actions(Driver.get());
+        actions.moveToElement(element).build().perform();
+    }
+ //-----------------------------------------------------------------------------------------
 
     public void logOut(){
 
@@ -119,27 +126,6 @@ public class BasePage {
         BrowserUtils.waitForPageToLoad(10);
     }
 
-
-    public void waitForPageSubTitle(String pageSubtitleText) {
-        new WebDriverWait(Driver.get(), 10).until(ExpectedConditions.textToBe(By.cssSelector("h2[class='subtitle']"), pageSubtitleText));
-    }
-
-
-    public void waitForVisibilityOfElement(WebElement element) {
-        new WebDriverWait(Driver.get(), 10).until(ExpectedConditions.visibilityOf(element));
-    }
-
-
-    public static void selectFromDropDown(WebElement element , String Visibletext){
-        Select select = new Select(element);
-        select.selectByVisibleText(Visibletext);
-    }
-
-
-    public static void hoverToElement(WebElement element){
-        Actions actions = new Actions(Driver.get());
-        actions.moveToElement(element).build().perform();
-    }
 
 
 
