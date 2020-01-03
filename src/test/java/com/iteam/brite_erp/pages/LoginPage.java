@@ -45,14 +45,16 @@ public class LoginPage extends BasePage {
 
     public void login(String role) {
         String userName = "";
-        String password = ConfigurationReader.getProperty("password");
+        String password = "";
 
         switch (role) {
-            case "posmanager":
+            case "Pos Manager":
                 userName = ConfigurationReader.getProperty("posmanager.username");
+                password = ConfigurationReader.getProperty("posmanager.password");
                 break;
-            case "eventscrmmanager":
+            case "Events CRM Manager":
                 userName = ConfigurationReader.getProperty("eventscrmmanager.username");
+                password = ConfigurationReader.getProperty("posmanager.password");
                 break;
             default:
                 throw new RuntimeException("Invalid role!");
