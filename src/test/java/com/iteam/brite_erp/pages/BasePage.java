@@ -14,7 +14,7 @@ import java.sql.Driver;
 public class BasePage {
 
       // if you login as a POSMANAGER you will see these elements
-      // These elements are from top navigation bar CONTACTS and POS (Point of Sale), CRM
+      // These elements are from top navigation bar CONTACTS and POS (Point of Sale), CRM, LOGOUT LINK
     @FindBy(xpath = "//a[@class='oe_menu_toggler'][@data-menu='68']")
     public WebElement contactsModule;
 
