@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.sql.Driver;
 
-public class loginPage {
+public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//a [@href='/web/login']")
     public WebElement loginLink;
@@ -22,7 +22,7 @@ public class loginPage {
     public  WebElement loginButton;
 
     //-------------------------------------------------------------------------------------------------------------
-    public loginPage(){
+    public LoginPage(){
         PageFactory.initElements(Driver.get(), this);
     }
 //--------------------------------------------------------------------------------------------------------------
