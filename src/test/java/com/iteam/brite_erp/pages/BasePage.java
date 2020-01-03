@@ -14,15 +14,22 @@ import java.sql.Driver;
 public class BasePage {
 
       // if you login as a POSMANAGER you will see these elements
-
-    // These elements are from top navigation bar CONTACTS and POS (Point of Sale)
+      // These elements are from top navigation bar CONTACTS and POS (Point of Sale), CRM
     @FindBy(xpath = "//a[@class='oe_menu_toggler'][@data-menu='68']")
     public WebElement contactsModule;
 
     @FindBy(xpath = "//a[@class='oe_menu_toggler'][@data-menu='484']")
     public WebElement posModule;
 
-//-------------------------------------------------------------------------------------------------------------
+    @FindBy(xpath = "//span[@class='oe_topbar_name']")
+    public WebElement logOutLink;
+
+    // if you login as an EVENTSCRMMANAGER you will need only CRM module on the top navigation bar for this assignment
+    @FindBy(xpath = "//a[@class='oe_menu_toggler'][@data-menu='261']")
+    public WebElement crmModule;
+
+
+    //-------------------------------------------------------------------------------------------------------------
     public BasePage(){
         PageFactory.initElements(Driver.get(), this);
     }

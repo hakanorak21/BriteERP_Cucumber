@@ -49,9 +49,6 @@ public class loginPage {
             case "posmanager":
                 userName = ConfigurationReader.getProperty("posmanager.username");
                 break;
-            case "inventorymanager":
-                userName = ConfigurationReader.getProperty("inventorymanager.username");
-                break;
             case "eventscrmmanager":
                 userName = ConfigurationReader.getProperty("eventscrmmanager.username");
                 break;
