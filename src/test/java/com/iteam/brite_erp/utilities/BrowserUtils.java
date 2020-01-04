@@ -6,23 +6,24 @@ import org.openqa.selenium.support.ui.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Driver;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.function.Function;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 public class BrowserUtils {
 
-    //It will be used to pause our test execution
-    //just provide number of seconds as a parameter
     public static void wait(int seconds) {
+
         try {
-            Thread.sleep(1000 * seconds);
-        } catch (InterruptedException e) {
+            Thread.sleep(1000*seconds);
+        } catch (InterruptedException e){
             e.printStackTrace();
         }
     }
-
 
     /**
      * Waits for element to be not stale
@@ -46,7 +47,6 @@ public class BrowserUtils {
             break;
         }
     }
-
 
     /**
      * Waits for the provided element to be visible on the page
@@ -82,27 +82,24 @@ public class BrowserUtils {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    //    PLEASE INSERT THIS METHOD INTO BROWSER UTILS
     /*
      * takes screenshot
-     * whenever you call this method
-     * it takes screenshot and returns location of the screenshot
-     * @param name of test or whatever your like
-     * take a name of a test and returns a path to screenshot takes
+     * @param name
+     * takes a name of a test and returns a path to screenshot takes
      */
     public static String getScreenshot(String name) {
         // name the screenshot with the current date time to avoid duplicate name
-//        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));​
-        SimpleDateFormat df = new SimpleDateFormat("-yyyy-MM-dd-HH-mm");
+        // String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        // ​
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String date = df.format(new Date());
         // TakesScreenshot ---> interface from selenium which takes screenshots
         TakesScreenshot ts = (TakesScreenshot) Driver.get();
         File source = ts.getScreenshotAs(OutputType.FILE);
         // full path to the screenshot location
-        //where screenshot will be stored
-        //System.getProperty("user.dir") returns path to the project as a string
         String target = System.getProperty("user.dir") + "/test-output/Screenshots/" + name + date + ".png";
         File finalDestination = new File(target);
+
         // save the screenshot to the path given
         try {
             FileUtils.copyFile(source, finalDestination);
@@ -120,7 +117,7 @@ public class BrowserUtils {
     public static void clickWithWait(WebElement webElement) {
         Wait wait = new FluentWait<>(Driver.get())
                 .withTimeout(Duration.ofSeconds(15))
-                .pollingEvery(Duration.ofMillis(800))
+                .pollingEvery(Duration.ofMillis(200))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(ElementNotVisibleException.class)
                 .ignoring(ElementClickInterceptedException.class)
@@ -136,6 +133,7 @@ public class BrowserUtils {
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
+            element.click();
         }
     }
 
@@ -146,9 +144,11 @@ public class BrowserUtils {
      */
     public static void waitForPageToLoad(long timeOutInSeconds) {
         ExpectedCondition<Boolean> expectation = driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+        ExpectedCondition<Boolean> expectation2 = driver -> ((JavascriptExecutor) driver).executeScript("return jQuery.active == 0").equals(true);
         try {
             WebDriverWait wait = new WebDriverWait(Driver.get(), timeOutInSeconds);
             wait.until(expectation);
+            wait.until(expectation2);
         } catch (Throwable error) {
             error.printStackTrace();
         }
@@ -156,16 +156,27 @@ public class BrowserUtils {
 
     /**
      * Wait for proper page title
-     *
      * @param pageTitle
      */
-    public static void waitForPageTitle(String pageTitle) {
+    public static void waitForPageTitle(String pageTitle){
         WebDriverWait wait = new WebDriverWait(Driver.get(), 10);
         wait.until(ExpectedConditions.titleIs(pageTitle));
-
     }
 
-
+    /**
+     * This method will convert list of WebElements into list of string
+     *
+     * @param listOfWebElements
+     * @return list of strings
+     */
+    public static List<String> getListOfString(List<WebElement> listOfWebElements) {
+        List<String> listOfStrings = new ArrayList<>();
+        for (WebElement element: listOfWebElements) {
+            String value = element.getText().trim();
+            if(value.length() > 0)
+                listOfStrings.add(value);
+        }
+        return listOfStrings;
+    }
 
 }
-
