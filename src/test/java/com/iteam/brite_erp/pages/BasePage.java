@@ -133,9 +133,4 @@ public class BasePage {
         BrowserUtils.waitForPageToLoad(10);
     }
 
-
-
-
-
-
 }
