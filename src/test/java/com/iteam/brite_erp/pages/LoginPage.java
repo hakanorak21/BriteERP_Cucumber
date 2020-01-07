@@ -1,13 +1,15 @@
 package com.iteam.brite_erp.pages;
 
+import com.iteam.brite_erp.utilities.ConfigurationReader;
+import com.iteam.brite_erp.utilities.Driver;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.sql.Driver;
 
-public class LoginPage extends BasePage {
+
+public class LoginPage {
 
     @FindBy(xpath = "//a [@href='/web/login']")
     public WebElement loginLink;
@@ -23,6 +25,7 @@ public class LoginPage extends BasePage {
 
     //-------------------------------------------------------------------------------------------------------------
     public LoginPage(){
+
         PageFactory.initElements(Driver.get(), this);
     }
 //--------------------------------------------------------------------------------------------------------------
