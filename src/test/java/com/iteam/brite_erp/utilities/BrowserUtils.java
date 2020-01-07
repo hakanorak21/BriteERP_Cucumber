@@ -6,13 +6,14 @@ import org.openqa.selenium.support.ui.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Driver;
+
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.function.Function;
 
 public class BrowserUtils {
 
