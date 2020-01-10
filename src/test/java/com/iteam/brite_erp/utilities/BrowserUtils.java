@@ -6,7 +6,10 @@ import org.openqa.selenium.support.ui.*;
 
 import java.io.File;
 import java.io.IOException;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 10ba3bc0b67ba038e6fbd155fa0cca2fb79fad65
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;

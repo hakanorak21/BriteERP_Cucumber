@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+<<<<<<< HEAD
 
 
 public class BasePage {
@@ -18,82 +19,51 @@ public class BasePage {
     // These elements are from top navigation bar CONTACTS and POS (Point of Sale), CRM, LOGOUT LINK
     @FindBy(xpath = "//a[@class='oe_menu_toggler'][@data-menu='68']")
     public WebElement contactsModule;
+=======
+public class BasePage {
 
-    @FindBy(xpath = "//a[@class='oe_menu_toggler'][@data-menu='484']")
-    public WebElement posModule;
+    @FindBy(css = "[class=breadcrumb] > li")
+    public WebElement pageSubTitle;
+>>>>>>> 10ba3bc0b67ba038e6fbd155fa0cca2fb79fad65
 
-    @FindBy(xpath = "//span[@class='oe_topbar_name']")
+    @FindBy(css = "[class=oe_topbar_name]")
+    public WebElement userName;
+
+    @FindBy(css = "[data-menu=logout]")
     public WebElement logOutLink;
 
-    // if you login as an EVENTSCRMMANAGER you will need only CRM module on the top navigation bar for this assignment
-    @FindBy(xpath = "//a[@class='oe_menu_toggler'][@data-menu='261']")
-    public WebElement crmModule;
-
-
-    //-------------------------------------------------------------------------------------------------------------
+    //Constructor
     public BasePage(){
         PageFactory.initElements(Driver.get(), this);
     }
-//--------------------------------------------------------------------------------------------------------------
 
-    // Method for navigation to CONTACTS module or POS module
-
+    /**
+     * This method stands for navigation in BriteERP app
+     * provide tab name, for example "CRM" as a String
+     * then based on this value, locator will be created
+     *
+     * @param moduleName
+     */
     public void navigateTo(String moduleName) {
+        Actions actions = new Actions(Driver.get());
+        String moduleLocator = "//span[contains(text(),'"+moduleName+"')]";
 
-        String moduleLocator = "//a[@class='oe_menu_toggler'][@data-menu='"+moduleName+"']";
+        WebDriverWait wait = new WebDriverWait(Driver.get(), 20);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(moduleLocator)));
         WebElement module = Driver.get().findElement(By.xpath(moduleLocator));
 
-        try {
-            waitForVisibilityOfElement(module);
-            hoverToElement(module);
-        } catch (Exception e) {
-            waitForVisibilityOfElement(menuElement);
-            menuElement.click();
-        }
-
-        waitForVisibilityOfElement(module);
-        BrowserUtils.waitForClickablility(module,10);
-        BrowserUtils.clickWithWait(module); //if click is not working well
+        wait.until(ExpectedConditions.visibilityOf(module));
+        wait.until(ExpectedConditions.elementToBeClickable(module));
+        BrowserUtils.clickWithWait(module);
         BrowserUtils.waitForPageToLoad(10);
     }
 
-//-------------------------------------------------------------------------------------
-
-    // For getting title
+    /**
+     * @return page name, for example: Notes
+     */
     public String getPageSubTitle() {
-        //ant time we are verifying page name, or page subtitle, loader mask appears
-//        waitUntilLoaderMaskDisappear();
         BrowserUtils.waitForStaleElement(pageSubTitle);
         return pageSubTitle.getText();
-    }
-
-    public String getPageTitle() {
-        //ant time we are verifying page name, or page subtitle, loader mask appears
-//        waitUntilLoaderMaskDisappear();
-        BrowserUtils.waitForStaleElement(pageTitle);
-        return pageTitle.getText();
-    }
-
-//-----------------------------------------------------------------------------------------
-
-    // Wait methods
-    public boolean waitUntilLoaderMaskDisappear() {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), 30);
-        try {
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[class='loader-mask shown']")));
-            return true;
-        } catch (NoSuchElementException e) {
-            System.out.println("Loader mask not found!");
-            e.printStackTrace();
-            return true; // no loader mask, all good, return true
-        } catch (WebDriverException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public void waitForPageSubTitle(String pageSubtitleText) {
-        new WebDriverWait(Driver.get(), 10).until(ExpectedConditions.textToBe(By.cssSelector("h2[class='subtitle']"), pageSubtitleText));
     }
 
 
@@ -101,11 +71,9 @@ public class BasePage {
         new WebDriverWait(Driver.get(), 10).until(ExpectedConditions.visibilityOf(element));
     }
 
-    //--------------------------------------------------------------------------------------------------
-
-    public static void selectFromDropDown(WebElement element , String Visibletext){
+    public static void selectFromDropDown(WebElement element , String visibleText){
         Select select = new Select(element);
-        select.selectByVisibleText(Visibletext);
+        select.selectByVisibleText(visibleText);
     }
 
 
@@ -113,30 +81,30 @@ public class BasePage {
         Actions actions = new Actions(Driver.get());
         actions.moveToElement(element).build().perform();
     }
+<<<<<<< HEAD
     //-----------------------------------------------------------------------------------------
+=======
+
+    public String getUserName() {
+        BrowserUtils.waitForVisibility(userName, 5);
+        return userName.getText();
+    }
+>>>>>>> 10ba3bc0b67ba038e6fbd155fa0cca2fb79fad65
 
     public void logOut(){
 
         BrowserUtils.wait(2);
-        String moduleLocator = "//a[text()='my'][@class='navbar-link']";
-        WebElement module = Driver.get().findElement(By.xpath(moduleLocator));
-
-        try {
-            waitForVisibilityOfElement(module);
-            hoverToElement(module);
-        } catch (Exception e) {
-            waitForVisibilityOfElement(menuElement);
-            menuElement.click();
-        }
-
-        waitForVisibilityOfElement(logOutLink);
+        BrowserUtils.clickWithJS(userName);
         BrowserUtils.clickWithJS(logOutLink);
-        BrowserUtils.waitForPageToLoad(10);
     }
 
+<<<<<<< HEAD
 
 
 
 
 
 }
+=======
+}
+>>>>>>> 10ba3bc0b67ba038e6fbd155fa0cca2fb79fad65
