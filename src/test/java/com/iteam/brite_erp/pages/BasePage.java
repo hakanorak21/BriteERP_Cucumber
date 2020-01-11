@@ -88,6 +88,7 @@ public class BasePage {
     public String getUserName() {
         BrowserUtils.waitForVisibility(userName, 5);
         return userName.getText();
+        //jkjkjk
     }
 >>>>>>> 10ba3bc0b67ba038e6fbd155fa0cca2fb79fad65
 
