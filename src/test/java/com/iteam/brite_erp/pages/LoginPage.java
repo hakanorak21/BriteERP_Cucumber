@@ -39,9 +39,9 @@ public class LoginPage extends BasePage {
         loginButton.click();
     }
 
-    // By deafult, login as Inventory Manager
+    // By deafult, login as Events Manager
     public void login() {
-        login(ConfigurationReader.getProperty("contactsUsername"), ConfigurationReader.getProperty("contactsPassword"));
+        login(ConfigurationReader.getProperty("crmUsername"), ConfigurationReader.getProperty("crmPassword"));
     }
 
     /*
