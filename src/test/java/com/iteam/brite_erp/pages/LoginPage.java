@@ -1,9 +1,6 @@
 package com.iteam.brite_erp.pages;
 
-<<<<<<< HEAD
-=======
 import com.iteam.brite_erp.utilities.BrowserUtils;
->>>>>>> 10ba3bc0b67ba038e6fbd155fa0cca2fb79fad65
 import com.iteam.brite_erp.utilities.ConfigurationReader;
 import com.iteam.brite_erp.utilities.Driver;
 import org.openqa.selenium.Keys;
@@ -11,13 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-<<<<<<< HEAD
-
-
-public class LoginPage {
-=======
 public class LoginPage extends BasePage {
->>>>>>> 10ba3bc0b67ba038e6fbd155fa0cca2fb79fad65
 
     @FindBy(xpath = "//a[@href='/web/login']/b")
     public WebElement loginLink;
@@ -33,7 +24,6 @@ public class LoginPage extends BasePage {
 
 
     public LoginPage(){
-
         PageFactory.initElements(Driver.get(), this);
     }
 

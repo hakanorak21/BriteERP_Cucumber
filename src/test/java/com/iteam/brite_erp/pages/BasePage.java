@@ -10,21 +10,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-<<<<<<< HEAD
-
-
-public class BasePage {
-
-    // if you login as a POSMANAGER you will see these elements
-    // These elements are from top navigation bar CONTACTS and POS (Point of Sale), CRM, LOGOUT LINK
-    @FindBy(xpath = "//a[@class='oe_menu_toggler'][@data-menu='68']")
-    public WebElement contactsModule;
-=======
 public class BasePage {
 
     @FindBy(css = "[class=breadcrumb] > li")
     public WebElement pageSubTitle;
->>>>>>> 10ba3bc0b67ba038e6fbd155fa0cca2fb79fad65
 
     @FindBy(css = "[class=oe_topbar_name]")
     public WebElement userName;
@@ -81,16 +70,11 @@ public class BasePage {
         Actions actions = new Actions(Driver.get());
         actions.moveToElement(element).build().perform();
     }
-<<<<<<< HEAD
-    //-----------------------------------------------------------------------------------------
-=======
 
     public String getUserName() {
         BrowserUtils.waitForVisibility(userName, 5);
         return userName.getText();
-        //jkjkjk
     }
->>>>>>> 10ba3bc0b67ba038e6fbd155fa0cca2fb79fad65
 
     public void logOut(){
 
@@ -99,13 +83,4 @@ public class BasePage {
         BrowserUtils.clickWithJS(logOutLink);
     }
 
-<<<<<<< HEAD
-
-
-
-
-
 }
-=======
-}
->>>>>>> 10ba3bc0b67ba038e6fbd155fa0cca2fb79fad65
